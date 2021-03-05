@@ -13,7 +13,7 @@
 #include <math.h>
 #include <algorithm>
 #include<glm/gtc/quaternion.hpp>
-#include<glm/common.hpp>
+//#include<glm/common.hpp>
 
 class Trackball
 {

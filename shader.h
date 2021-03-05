@@ -12,6 +12,26 @@ class Shader
 {
 public:
 	unsigned int ID;
+
+	std::string LoadShaderFile(const std::string sFilePath)
+	{
+		std::fstream fs;
+		std::string str;
+		fs.open(sFilePath);
+		if (fs.is_open())
+		{
+			fs.seekg(0, fs.end);
+			int len = int(fs.tellg());
+			fs.seekg(0, fs.beg);
+			char* buf = new char[len];
+			memset(buf, 0, len);
+			fs.read(buf, len);
+			str.assign(buf);
+			delete[] buf;
+		}
+		return str;
+	}
+
 	//constructor generates shader on the fly
 	Shader(const char* vertexPath, const char* fragmentPath, const char* geometryPath = nullptr)
 	{
@@ -53,8 +73,15 @@ public:
 		}
 		catch (std::ifstream::failure e)
 		{
-			std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+			std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ:"<< e.what() << std::endl;
 		}
+
+		/*vertexCode = LoadShaderFile(vertexPath);
+		fragmentCode = LoadShaderFile(fragmentPath);
+		if(geometryPath != nullptr)
+		{
+			geometryCode = LoadShaderFile(geometryPath);
+		}*/
 
 		const char* vShaderCode = vertexCode.c_str();
 		const char* fShaderCode = fragmentCode.c_str();

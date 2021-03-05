@@ -1,5 +1,5 @@
 #include "Trackball.h"
-
+#include <glm/gtx/quaternion.hpp>
 /**
  * Constructor.
  * @param roll_speed the speed of rotation

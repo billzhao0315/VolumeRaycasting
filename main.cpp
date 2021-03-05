@@ -68,7 +68,7 @@ const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 //camera
-FixedCamera camera(glm::vec3(-2.5f, 0, 0));
+FixedCamera camera(glm::vec3(-80.0f, 0, 0));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
@@ -78,7 +78,7 @@ bool firstMouse = true;
 float deltaTime = 0.0f; //Time between current frame and last frame
 float lastFrame = 0.0f; //Time of last frame
 
-static Trackball trackball(SCR_WIDTH, SCR_HEIGHT, 2.0f);
+static Trackball trackball(SCR_WIDTH, SCR_HEIGHT, 4.0f);
 
 string windowTitle = "MultiPass GPU Raycasting";
 
@@ -323,7 +323,7 @@ int main()
 		glBindVertexArray(cubeVAO);
 		//Setup Uniforms
 		glm::mat4 view = camera.GetViewMatrix();
-		glm::mat4 model = mat4_cast(cubeTransform.rotQuat);
+		glm::mat4 model = glm::mat4_cast(cubeTransform.rotQuat);
 		firstPassShader.setMat4("MVP", projection * view * model);
 
 		glEnable(GL_BLEND);
